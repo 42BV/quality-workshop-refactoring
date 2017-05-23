@@ -32,7 +32,7 @@ public class AccountService {
      * @param transactionRequest TransactionRequest - request with amount, from number and to number.
      * @return Transaction - the data of the successfully executed transaction
      */
-    public Transaction transferAmount(TransactionRequest transactionRequest) {
+    public Transaction transfer(TransactionRequest transactionRequest) {
 
         // Verify all the incoming arguments are valid
         if (transactionRequest == null) {
