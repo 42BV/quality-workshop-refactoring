@@ -18,7 +18,11 @@ public class AccountRepository {
     }
 
     public Account findByNumber(AccountNumber accountNumber) {
-        return accounts.get(accountNumber);
+        Account account = accounts.get(accountNumber);
+        if (account == null) {
+            throw new AccountDoesNotExistException(accountNumber);
+        }
+        return account;
     }
 
     public Account save(Account account) {

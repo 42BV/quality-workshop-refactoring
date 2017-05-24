@@ -1,10 +1,10 @@
 package nl._42.qualityws.refactoring;
 
-import static nl._42.qualityws.refactoring.AccountService.NORMAL_DEBT_LIMIT;
-import static nl._42.qualityws.refactoring.AccountService.NORMAL_TRANSACTION_LIMIT;
 import static nl._42.qualityws.refactoring.AccountService.OWN_ACCOUNT_TRANSACTION_LIMIT;
-import static nl._42.qualityws.refactoring.AccountService.PREMIUM_DEBT_LIMIT;
-import static nl._42.qualityws.refactoring.AccountService.PREMIUM_TRANSACTION_LIMIT;
+import static nl._42.qualityws.refactoring.domain.AccountType.NORMAL_DEBT_LIMIT;
+import static nl._42.qualityws.refactoring.domain.AccountType.NORMAL_TRANSACTION_LIMIT;
+import static nl._42.qualityws.refactoring.domain.AccountType.PREMIUM_DEBT_LIMIT;
+import static nl._42.qualityws.refactoring.domain.AccountType.PREMIUM_TRANSACTION_LIMIT;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -20,6 +20,9 @@ import nl._42.qualityws.refactoring.domain.Account;
 import nl._42.qualityws.refactoring.domain.AccountHolder;
 import nl._42.qualityws.refactoring.domain.AccountNumber;
 import nl._42.qualityws.refactoring.domain.AccountType;
+import nl._42.qualityws.refactoring.domain.IllegalAccountNumberException;
+import nl._42.qualityws.refactoring.domain.IllegalAmountException;
+import nl._42.qualityws.refactoring.domain.SameAccountTransferException;
 import nl._42.qualityws.refactoring.domain.Transaction;
 import nl._42.qualityws.refactoring.domain.TransactionRequest;
 
@@ -27,7 +30,6 @@ import nl._42.qualityws.refactoring.domain.TransactionRequest;
 @SpringBootTest
 public class AccountServiceTest {
 
-    public static AccountNumber INVALID_ACCOUNT         = new AccountNumber("11.11.11.111");
     public static AccountNumber VALID_FROM_ACCOUNT      = new AccountNumber("73.61.60.221");
     public static AccountNumber VALID_FROM_ACCOUNT_SAME = new AccountNumber("0736160221");
     public static AccountNumber VALID_TO_ACCOUNT        = new AccountNumber("126754365");
@@ -76,22 +78,6 @@ public class AccountServiceTest {
         accountService.transfer(new TransactionRequest(
                 VALID_FROM_ACCOUNT,
                 null,
-                new BigDecimal("42.00")));
-    }
-
-    @Test(expected = IllegalAccountNumberException.class)
-    public void transferAmount_throwsException_invalidFromAccount() {
-        accountService.transfer(new TransactionRequest(
-                INVALID_ACCOUNT,
-                VALID_TO_ACCOUNT,
-                new BigDecimal("42.00")));
-    }
-
-    @Test(expected = IllegalAccountNumberException.class)
-    public void transferAmount_throwsException_invalidToAccount() {
-        accountService.transfer(new TransactionRequest(
-                VALID_FROM_ACCOUNT,
-                INVALID_ACCOUNT,
                 new BigDecimal("42.00")));
     }
 

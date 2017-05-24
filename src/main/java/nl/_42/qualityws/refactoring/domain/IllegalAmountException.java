@@ -1,4 +1,4 @@
-package nl._42.qualityws.refactoring;
+package nl._42.qualityws.refactoring.domain;
 
 import java.math.BigDecimal;
 
