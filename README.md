@@ -1,5 +1,5 @@
 # Quality workshop: refactoring an existing codebase
-Contains the result of the refactoring assignment.
+Contains the solution to the refactoring assignment.
 
 ## Refactor step 1: delegation to domain class
 Apart from the first null check in the AccountService.transferAmount(..) method, there are 5 argument checks that can be delegated to a domain class...
@@ -8,7 +8,7 @@ Apart from the first null check in the AccountService.transferAmount(..) method,
   - Moved the 3 exceptions to the domain package
 
 ## Refactor step 2: delegation to repository
-When the AccountService uses the AccountRepository to find an Account for a AccountNumber, it has to check if the returned Account is not null. Each time it does such a lookup!
+When the AccountService uses the AccountRepository to find an Account for an AccountNumber, it has to check if the returned Account is not null. Each time it does such a lookup!
 - Move the nullcheck into the repository.
   - AccountRepository.findByNumber(..) extended with null check.
   - Removed null check on Account from AccountService.transfer(..).
