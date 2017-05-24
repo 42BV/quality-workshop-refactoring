@@ -2,7 +2,7 @@
 Contains the solution to the refactoring assignment.
 
 ## Refactor step 1: delegation to domain class
-Apart from the first null check in the AccountService.transferAmount(..) method, there are 5 argument checks that can be delegated to a domain class...
+Apart from the first null check in the AccountService.transfer(..) method, there are 5 argument checks that can be delegated to a domain class...
 - Move these 5 checks to the corresponding domain class. 
   - Moved the 5 checks to TransactionRequest constructor.
   - Moved the 3 exceptions to the domain package
