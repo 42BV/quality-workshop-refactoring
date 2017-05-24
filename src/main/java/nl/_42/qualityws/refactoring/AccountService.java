@@ -32,30 +32,31 @@ public class AccountService {
             throw new IllegalArgumentException("Transaction cannot be null");
         }
 
+        BigDecimal amount = transactionRequest.getAmount();
         Account fromAccount = accountRepository.findByNumber(transactionRequest.getFrom());
         Account toAccount = accountRepository.findByNumber(transactionRequest.getTo());
 
-        verifyTransactionLimit(transactionRequest, fromAccount, toAccount);
-        verifyDebtLimit(transactionRequest, fromAccount);
+        verifyTransactionLimit(amount, fromAccount, toAccount);
+        verifyDebtLimit(amount, fromAccount);
 
-        return executeTransaction(transactionRequest.getAmount(), fromAccount, toAccount);
+        return executeTransaction(amount, fromAccount, toAccount);
     }
 
-    private void verifyTransactionLimit(TransactionRequest transactionRequest, Account fromAccount, Account toAccount) {
+    private void verifyTransactionLimit(BigDecimal amount, Account fromAccount, Account toAccount) {
         final BigDecimal useTransactionLimit;
         if (fromAccount.getHolder().equals(toAccount.getHolder())) {
             useTransactionLimit = OWN_ACCOUNT_TRANSACTION_LIMIT;
         } else {
             useTransactionLimit = fromAccount.getType().getTransactionLimit();
         }
-        if (useTransactionLimit.compareTo(transactionRequest.getAmount()) < 0) {
-            throw new AmountExceedsTransactionLimitException(useTransactionLimit, transactionRequest.getAmount());
+        if (useTransactionLimit.compareTo(amount) < 0) {
+            throw new AmountExceedsTransactionLimitException(useTransactionLimit, amount);
         }
     }
     
-    private BigDecimal verifyDebtLimit(TransactionRequest transactionRequest, Account fromAccount) {
+    private BigDecimal verifyDebtLimit(BigDecimal amount, Account fromAccount) {
         final BigDecimal debtLimit = fromAccount.getType().getDebtLimit();
-        BigDecimal resultFromBalance = fromAccount.getBalance().subtract(transactionRequest.getAmount());
+        BigDecimal resultFromBalance = fromAccount.getBalance().subtract(amount);
         if (resultFromBalance.compareTo(debtLimit) < 0) {
             throw new AmountExceedsDebtLimitException(debtLimit, resultFromBalance);
         }

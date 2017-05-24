@@ -8,7 +8,7 @@ Apart from the first null check in the AccountService.transferAmount(..) method,
   - Moved the 3 exceptions to the domain package
 
 ## Refactor step 2: delegation to repository
-When the AccountService uses the AccountRepository to find an Account for an AccountNumber, it has to check if the returned Account is not null. Each time it does such a lookup!
+When the AccountService uses the AccountRepository to find an Account for an AccountNumber, it has to check if the returned Account is not null each time it does such a lookup!
 - Move the nullcheck into the repository.
   - AccountRepository.findByNumber(..) extended with null check.
   - Removed null check on Account from AccountService.transfer(..).
@@ -22,7 +22,7 @@ Take good care of what arguments and return types these 3 methods will get.
 When you are done and all unittests succeed, you can remove the comments that came with the 3 code blocks as the methods names are self-explaining now!
   - Extracted 3 code blocks into private mehtods on AccountService.
   - verifyDebtLimit(..) gets void return type as it must concentrate on one purpose, the verification, it's not responsible for determining the resultBalance of the from account.
-  - executeTransaction(..) gets BigDecimal amount as first argument instead of the complete TransactionRequest as only the amount is used here.
+  - All 3 private methods get BigDecimal amount as first argument instead of the complete TransactionRequest as only the amount is used within these methods.
 
 ## Refactor step 4: implementing equals/hashcode on domain class
 In the verifyTransactionLimit(..) a check is done if the AccountHolder's are the same or not. This is done by comparing their name property. If we implement an equals/hashCode method pair (as is done in AccountNumber), we can call equals on AccountHolder directly.
