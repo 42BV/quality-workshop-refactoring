@@ -5,14 +5,14 @@ package nl._42.qualityws.refactoring.domain;
  */
 public class AccountNumber {
 
-    private final String rawRekeningNummer;
+    private final String rawAccountNumber;
 
-    public AccountNumber(String rawRekeningNummer) {
-        this.rawRekeningNummer = rawRekeningNummer;
+    public AccountNumber(String rawAccountNumber) {
+        this.rawAccountNumber = rawAccountNumber;
     }
 
     public String raw() {
-        return rawRekeningNummer;
+        return rawAccountNumber;
     }
 
     @Override
@@ -20,12 +20,12 @@ public class AccountNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountNumber that = (AccountNumber) o;
-        return rawRekeningNummer != null ? rawRekeningNummer.equals(that.rawRekeningNummer) : that.rawRekeningNummer == null;
+        return rawAccountNumber != null ? rawAccountNumber.equals(that.rawAccountNumber) : that.rawAccountNumber == null;
     }
 
     @Override
     public int hashCode() {
-        return rawRekeningNummer != null ? rawRekeningNummer.hashCode() : 0;
+        return rawAccountNumber != null ? rawAccountNumber.hashCode() : 0;
     }
 
 }

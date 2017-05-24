@@ -3,7 +3,7 @@ package nl._42.qualityws.refactoring.domain;
 import java.math.BigDecimal;
 
 /**
- * Domain class that represents a bankaccount.
+ * Domain class that represents a bank account.
  */
 public class Account {
 

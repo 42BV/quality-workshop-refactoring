@@ -9,7 +9,7 @@ We will be taking several refactor steps. After each step we can verify if the s
 This is also the main lesson of this exercise: you can never start refactoring existing code without a proper unittest base!
 
 ## Refactor step 1: delegation to domain class
-Apart from the first null check in the AccountService.transferAmount(..) method, there are 5 argument checks that can be delegated to a domain class...
+Apart from the first null check in the AccountService.transfer(..) method, there are 5 argument checks that can be delegated to a domain class...
 - Move these 5 checks to the corresponding domain class.
 
 ## Refactor step 2: delegation to repository
