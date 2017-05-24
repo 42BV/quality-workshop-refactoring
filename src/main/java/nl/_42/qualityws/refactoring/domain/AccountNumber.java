@@ -1,7 +1,5 @@
 package nl._42.qualityws.refactoring.domain;
 
-import nl._42.qualityws.refactoring.util.ElevenCheck;
-
 /**
  * Domain class that represents a id number of a bank {@link Account}.
  */
@@ -11,10 +9,6 @@ public class AccountNumber {
 
     public AccountNumber(String rawRekeningNummer) {
         this.rawRekeningNummer = rawRekeningNummer;
-    }
-
-    public boolean isValid() {
-        return ElevenCheck.execute(rawRekeningNummer);
     }
 
     public String raw() {
