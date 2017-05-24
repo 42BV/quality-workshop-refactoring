@@ -62,11 +62,13 @@ public class ElevenCheckTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void elevenCheck_shouldError_whenAccountNumber_zeroesOnly() {
-        ElevenCheck.execute("00000000");
+        final String accountNumber = "00000000";
+        ElevenCheck.execute(accountNumber);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void elevenCheck_shouldError_whenAccountNumber_exceedsMaxLength() {
-        ElevenCheck.execute("123456789012");
+        final String accountNumber = "123456789012";
+        ElevenCheck.execute(accountNumber);
     }
 }
